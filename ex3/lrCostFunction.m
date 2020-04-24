@@ -38,7 +38,7 @@ grad = zeros(size(theta));
 z=X*theta;
 h=sigmoid(z);
 one=ones(m,1);
-aux1=-(y.*(log(h)))-((one-y).*log(one-h));
+aux1=-(y.*(log10(h)))-((one-y).*log10(one-h));
 aux2=theta.^2;
 J=((sum(aux1))/m)+((lambda*sum(aux2))/(2*m));
 
