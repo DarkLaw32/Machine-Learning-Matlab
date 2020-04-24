@@ -37,22 +37,10 @@ grad = zeros(size(theta));
 %
 z=X*theta;
 h=sigmoid(z);
-one=ones(m,1);
-aux1=-(y.*(log(h)))-((one-y).*log(one-h));
+aux1=-(y.*(log(h)))-((1-y).*log(1-h));
 aux2=theta.^2;
-J=((sum(aux1))/m)+((lambda*sum(aux2))/(2*m));
+J=((sum(aux1))/m)+((lambda*));
 
-[a,b]=size(grad);
-aux3=(h-y).*X;
-grad_ini=(1/m)*sum(aux3);
-
-for j=1:a
-    if j==1
-        grad(j)=grad_ini(j);    
-    else
-        grad(j)=grad_ini(j)+(lambda/m)*theta(j); 
-    end
-end
 
 
 
