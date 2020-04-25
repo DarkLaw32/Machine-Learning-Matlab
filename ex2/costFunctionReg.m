@@ -18,15 +18,15 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 z=X*theta;
 h=sigmoid(z);
-one=zeros(m,1);
-for i=1:m
-    one(i)=1.0;
-end
+one=ones(m,1);
 aux1=-(y.*(log(h)))-((one-y).*log(one-h));
-aux2=sum(aux1)/118.0;
-aux3=theta.^2;
-aux4=(lambda*sum(aux3))/(2.0*118.0);
-J=aux2+aux4;
+aux2=sum(aux1);
+theta_aux=[0;theta(2:size(theta),:)];
+aux3=theta_aux.^2;R=lambda*sum(aux3)/(2*m);
+J=(aux2/m)+R;
+
+
+
 
 [a,b]=size(grad);
 aux3=(h-y).*X;
