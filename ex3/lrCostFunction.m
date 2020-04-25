@@ -38,13 +38,16 @@ grad = zeros(size(theta));
 z=X*theta;
 h=sigmoid(z);
 one=ones(m,1);
-aux1=-(y.*(log10(h)))-((one-y).*log10(one-h));
-aux2=theta.^2;
-J=((sum(aux1))/m)+((lambda*sum(aux2))/(2*m));
+aux1=-(y.*(log(h)))-((one-y).*log(one-h));
+aux2=sum(aux1);
+theta_aux=[0;theta(2:size(theta),:)];
+aux3=theta_aux.^2;
+R=lambda*sum(aux3)/(2*m);
+J=(aux2/m)+R;
 
 [a,b]=size(grad);
-aux3=(h-y).*X;
-grad_ini=(1/m)*sum(aux3);
+aux4=(h-y).*X;
+grad_ini=(1/m)*sum(aux4);
 
 for j=1:a
     if j==1
