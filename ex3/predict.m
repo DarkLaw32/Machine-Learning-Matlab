@@ -23,6 +23,14 @@ p = zeros(size(X, 1), 1);
 
 
 
+X_aux=[ones(m,1) X];%Incluimos a la variable X una de unos por delante
+h1=[ones(m,1) sigmoid(X_aux * Theta1')];
+h2=  sigmoid(h1*Theta2');
+[maxh2, imaxh2] = max(h2');
+p=imaxh2';
+    
+
+
 
 
 
