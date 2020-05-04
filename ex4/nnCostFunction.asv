@@ -78,14 +78,15 @@ z3=a2*Theta2';
 a3=sigmoid(z3);
 h=a3;
 
-J_aux=sum(sum((-Y).*log(h)-(1-Y).*log(1-h),2))/m;
+J=sum(sum((-Y).*log(h)-(1-Y).*log(1-h),2))/m;
 
 %SEGUNDA PARTE COSTO CON REGULARIZACION
 Theta_aux1=Theta1(:,2:end);%Creamos un vector auxiliar de Theta1 eliminando la primera columna correspondiente a bias.
-Theta_aux2=Theta2(:,2:end);%Creamos un vector auxiliar de Theta2 eliminando la primera columna correspondiente a bias.
-R_aux=sum(sum(Theta_aux1.^2,2))+sum(sum(Theta_aux2.^2,2));%Calculamos el valor de R sin las constantes
-R=(lambda*R_aux)/(2*m);%Inclusion de las constantes de la formula
-J=J_aux+R;%Calculo del costo con y sin regularizacion
+Theta_aux2=Theta1(:,2:end);
+                                  
+
+
+
 
 
 
