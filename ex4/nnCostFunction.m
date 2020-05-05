@@ -87,7 +87,20 @@ R_aux=sum(sum(Theta_aux1.^2,2))+sum(sum(Theta_aux2.^2,2));%Calculamos el valor d
 R=(lambda*R_aux)/(2*m);%Inclusion de las constantes de la formula
 J=J_aux+R;%Calculo del costo con y sin regularizacion
 
+%TERCERA PARTE CALCULO DEL GRADIENTE
+sigma3=a3-Y;%Segundo paso: Calculo de sigma 3 correspondiente a la salida
+sigma2=(sigma3*Theta2).*sigmoidGradient([ones(size(z2, 1), 1) z2]);%Tercer Paso Calculamos el valor de sigma2 anadiendo una fila de unos por las bias de activacion
+sigma2=sigma2(:, 2:end);
+delta1=sigma2'*a1;%Calculo de delta para la etapa 1
+delta2=sigma3'*a2;%Calculo de delta para la etapa 2
+R1 = (lambda/m)*[zeros(size(Theta1, 1), 1) Theta1(:, 2:end)];
+R2 = (lambda/m)*[zeros(size(Theta2, 1), 1) Theta2(:, 2:end)];
+%Valores de Theta con y sin regularizacion
+Theta1_grad=(1/m)*delta1+R1;
+Theta2_grad=(1/m)*delta2+R2;
 
+%Calculo del Gradiente Total
+grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
 
 
